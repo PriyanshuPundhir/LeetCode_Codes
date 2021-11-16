@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) 
+    {
+        int count=0;
+        flowerbed.push_back(0);
+        flowerbed.insert(flowerbed.begin(), 0);
+        for(int i=1;i<flowerbed.size()-1;i++)
+        {
+            if(flowerbed[i]==0)
+            {
+             int prev=flowerbed[i-1];
+             int next=flowerbed[i+1];
+                if(prev==0 && next==0)
+                {
+                    count++;
+                    flowerbed[i]=1;
+                }
+            }
+            if(count>=n) return true;
+        }
+        return false;
+    }
+};

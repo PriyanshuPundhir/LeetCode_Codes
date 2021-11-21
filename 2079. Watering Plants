@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int wateringPlants(vector<int>& plants, int capacity) 
+    {
+        int nc=capacity;
+        int steps=0;
+        for(int i=0;i<plants.size();i++)
+        {
+            if(plants[i]<=nc)
+            {
+                nc=nc-plants[i];
+                steps++;
+                plants[i]=0;
+            }
+            else if(plants[i]>nc)
+            {
+                steps=i+steps+1;
+                nc=capacity;
+                nc=nc-plants[i];
+                plants[i]=0;
+                i=0;
+            }
+        }
+        return steps;
+    }
+};

@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int jump(vector<int>& nums) 
+    {
+      int i = 0;
+      int maxrch = 0;
+      int lastpos = 0; 
+      int jumps = 0;
+	while(lastpos < nums.size() - 1)
+    {  
+		maxrch = max(maxrch, i + nums[i]);  
+		if(i == lastpos) 
+        {			  
+			lastpos = maxrch;    
+			jumps++;                          
+		}            
+		i++;
+	}
+	return jumps;
+    }
+};

@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int findFinalValue(vector<int>& nums, int original) 
+    {
+       set<int> mset;
+        for(int i=0;i<nums.size();i++)
+        {
+            mset.insert(nums[i]);
+        }
+        while(mset.count(original))
+        {
+             original=original*2;
+        }
+        return original;
+    }
+};

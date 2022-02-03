@@ -1,0 +1,35 @@
+class Solution {
+public:
+    string removeKdigits(string num, int k) 
+    {
+        int n = num.size();
+        stack<char> s;
+        for(char c:num)
+        {
+            // if s.top element is greater than c i.e. we are facing decreasing graph
+          while(!s.empty() && k>0 && s.top()>c)
+          {
+            s.pop();
+              k--;
+          }
+            // We don't want 0 to be leading number
+            if(!s.empty() || c!='0')
+                s.push(c);
+        }
+        // If the graph was strictly increasing then we haven't seen a dip so k is left
+         while(!s.empty() && k--)
+               {
+             // just start poping from the front
+             s.pop();
+         }
+        if(s.empty())
+            return "0";
+        while(!s.empty())
+        {
+            num[n-1]=s.top();
+            s.pop();
+            n--;
+        }
+        return  num.substr(n);
+    }
+};

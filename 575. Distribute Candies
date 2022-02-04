@@ -1,0 +1,9 @@
+class Solution {
+public:
+    int distributeCandies(vector<int>& candyType) {
+        int s = set<int>(candyType.begin(), candyType.end()).size();
+        int n = candyType.size();
+        return min(s,n/2);
+
+    }
+};

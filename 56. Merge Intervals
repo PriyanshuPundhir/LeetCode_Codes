@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& nums) {
+        vector<vector<int>> res;
+        if(nums.size() == 0) return res;
+        vector<int> temp = nums[0];
+        sort(nums.begin(),nums.end());
+        for(auto it:nums)
+        {
+          if(it[0] <= temp[1])
+          {
+              temp[1] = max(temp[1],it[1]);
+          }
+            else
+            {
+                res.push_back(temp);
+                temp = it;
+            }
+        }
+        res.push_back(temp);
+        return res;
+    }
+};

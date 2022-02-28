@@ -1,0 +1,33 @@
+class Solution {
+public:
+    // in this question we are going to make recursion call for the solution 
+    // We have to choose max of (nums[0]* multiper[i]) 0<i<m.size() or (nums[n-     1]*multiper[i])
+    // after forming reccusion tree there will be TLE
+    //so we will optimise it by making dp array
+    // We will save the already solved sub-problems
+    
+    // dp array of size 10^3
+    int dp[1001][1001];
+    int solve(int i,vector<int>& M,vector<int>& nums,int s)
+    {
+        // base case
+        if(i == M.size()) return 0;
+        // end  element 
+        int e = nums.size()-(i-s) -1;
+        // If we have calculated that value previously we will just return it
+        if(dp[i][s] != -1) return dp[i][s];
+        // taking from start  start pointer will increase
+        int op1 = M[i]*nums[s] + solve(i+1,M,nums,s+1);
+        // taking from end end pointer will decrease
+        int op2 = M[i]*nums[e] + solve(i+1,M,nums,s);
+        return dp[i][s] = max(op1,op2);
+    }
+    int maximumScore(vector<int>& nums, vector<int>& M) {
+        //index = 0 for Multiplier array
+        // start = 0
+        // end = nums.size()-1
+        // all values are initially -1
+        memset(dp,-1,sizeof dp);
+        return solve(0,M,nums,0);
+    }
+};

@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int helper(int r, int c , vector<vector<int>>& triangle, vector<vector<int>>& dp)
+    {
+        if(r >= triangle.size()) return 0;
+        if(dp[r][c] != -1) return dp[r][c];
+       return dp[r][c] = min(helper(r+1,c,triangle,dp) , helper(r+1,c+1,triangle,dp))
+            + triangle[r][c]; 
+    }
+    
+    int minimumTotal(vector<vector<int>>& triangle) {
+       int n = triangle.size();
+         int minSum = INT_MAX;
+        int k = n;
+        vector<vector<int>> dp(n,vector<int>(k,-1));
+        minSum = helper(0,0,triangle,dp);
+        return minSum;
+    }
+};

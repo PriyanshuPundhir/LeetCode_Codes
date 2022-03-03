@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        // we will store previos count 
+        int prv_cnt=0;
+       // total variable to store the result
+        int total = 0;
+        for(int i=2;i<nums.size();i++)
+        {
+            // this formula will tell us if the current element is forming AP or not
+            if(nums[i]-nums[i-1] == nums[i-1]-nums[i-2])
+            {
+           // if it's ap then add previous element +1 for current element
+             prv_cnt = prv_cnt+1;
+            }
+            else{
+                // else write 0
+               prv_cnt = 0;
+            }
+            
+            total+=prv_cnt;
+        }
+        return total;
+    }
+};

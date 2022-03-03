@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        int lo,hi,sum;
+// we will go till last 3rd element so that we can consider lats 3 element as triplets
+        for(int i=0;i<(int)(nums.size())-2;i++)
+        {
+            // we are doing it so that we can avoid duplicates i should be at 1st or                 //should follow this condition
+            if(i == 0 || (i>0 && nums[i]!=nums[i-1]))
+            // low and high pointer and sum = 0-1 as (b+c = -a)
+            lo = i+1, hi = (int)(nums.size())-1, sum = 0 - nums[i];
+            while(lo < hi)
+            {
+                // we are looking for the condition in which b+c = -a
+                if(nums[lo] + nums[hi] == sum)
+                {
+                    vector<int> temp;
+                    temp.push_back(nums[i]);
+                    temp.push_back(nums[lo]);
+                    temp.push_back(nums[hi]);
+                    ans.push_back(temp);
+                    
+                    // to avoid duplicates we will skip same values untill we find a new different value
+                    while(lo < hi && nums[lo] == nums[lo+1]) lo++;
+                    while(lo < hi && nums[hi] == nums[hi-1]) hi--;
+                    lo++;
+                    hi--;
+                }
+                // if sum is less than the addition then we need to increase value by doing lo++ because we know array is in sorted order
+                else if(nums[lo] + nums[hi] < sum)
+                {
+                    lo++;
+                }
+                // if sum is more than the addition then we need to decrease value by doing hi--
+                else
+                {
+                    hi--;
+                }
+            }
+        }
+        return ans;
+    }
+};

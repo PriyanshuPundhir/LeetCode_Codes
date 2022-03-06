@@ -1,0 +1,32 @@
+class Solution {
+public:
+         /*  
+            0
+          01 10
+        01 10 10 01
+        */
+    // Things to observe
+    // 1). Number of elements in nth row is equal to 2^n-1.
+    // 2). If we take mid of nth row then elements from 1 to mid is equal to elements in (n-1)th row elements 
+    // 3). And elements after mid+1 to last is the complementary of (n-1)th row elements
+    // eg - n = 3 
+    // elements = 0110 1001
+    // length = 8  and mid = 4
+    // n-1 =2 
+    // elements = 0110 1st half of 3rd row
+    // and after taking complement 1001 is 2nd half of 3rd row
+    int kthGrammar(int n, int k) {
+        
+            if(k==1 && n==1) return 0;
+         
+            int mid = pow(2,n-1)/2;
+            if(k <= mid)
+            {
+                return kthGrammar(n-1,k);
+            }
+            else
+            {
+               return ! kthGrammar(n-1,k-mid);
+            }
+        }
+};

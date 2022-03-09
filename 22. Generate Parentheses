@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        // result output string 
+        string op = "";
+        // number of total opening Parentheses
+        int open_brct = n;
+        // number of total closing Parentheses
+        int close_brct = n;
+        solve(open_brct,close_brct,op,res);
+        return res;
+    }
+    void solve(int open_brct , int close_brct,string op,vector<string>& res){
+        // this is the base condition if we have reached to the leaf of the tree we return
+        if(open_brct == 0 && close_brct == 0){
+            res.push_back(op);
+            return ;
+        }
+        // we can include as many number of opening Parentheses as we want untill we are left with opening Parentheses 
+        if(open_brct != 0){
+            string op1 = op;
+            op1.push_back('(');
+       // after inserting open Parentheses we will decrease the total open Parentheses by 1 
+            solve(open_brct-1,close_brct,op1,res);
+        }
+        // when ever closing Parentheses is higher than opening Parentheses we can insert closing Parentheses
+        if(close_brct > open_brct)
+        {
+            string op2 = op;
+            op2.push_back(')');
+       // after inserting close Parentheses we will decrease the total close Parentheses by 1 
+            solve(open_brct,close_brct-1,op2,res);
+        }
+        return ;
+    }
+};

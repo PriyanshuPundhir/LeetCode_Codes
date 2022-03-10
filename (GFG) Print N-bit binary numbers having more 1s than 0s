@@ -1,0 +1,28 @@
+class Solution{
+public:	
+	vector<string> NBitBinary(int N)
+	{
+	    int n = N;
+	    int once = 0;
+	    int zero = 0;
+	    string op ="";
+	    vector<string> res;
+	    solve(once,zero,n,op,res);
+	    return res;
+	    }
+	    void solve(int once,int zero,int n,string op,vector<string>& res){
+	        if(n==0){
+	            res.push_back(op);
+	            return;
+	        }
+	        string op1 = op;
+	        op1.push_back('1');
+	        solve(once+1,zero,n-1,op1,res);
+	        if(once > zero){
+	            string op2 = op;
+	            op2.push_back('0');
+	            solve(once,zero+1,n-1,op2,res);
+	        }
+	        return;
+	    }
+};

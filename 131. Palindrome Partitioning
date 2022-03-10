@@ -1,0 +1,39 @@
+class Solution {
+public:
+    vector<vector<string>> partition(string s) {
+       // for storing results
+        vector<vector<string>> res;
+        // for storing one string at a time
+        vector<string> temp;
+        // function will start with index 0
+        solve(0,s,temp,res);
+        return res;
+    }
+    void solve(int index,string s,vector<string>& temp,vector<vector<string>>& res){
+        if(index == s.size())
+        {
+            res.push_back(temp);
+            return;
+        }
+        // we will loop till s.size() because we will ckeck if we can have partition in between or not
+        for(int i = index;i<s.size();i++)
+        {
+            // if the string is Palindrome then push it in temp vector
+            if(isPalindrome(s,index,i))
+            {
+                temp.push_back(s.substr(index,i-index+1));
+                // increase the index and call solve function again
+                solve(i+1,s,temp,res);
+                // we do this so that next call could be made while backtracking
+                temp.pop_back();
+            }
+        }
+        return;
+    }
+    bool isPalindrome(string s,int start,int end){
+        while(start<=end){
+            if(s[start++]!=s[end--]) return false;
+        }
+        return true;
+    }
+};

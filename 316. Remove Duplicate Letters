@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        int last_index[26] = {};
+        bool seen[26] = {};
+        for(int i=0;i<s.size();i++){
+            last_index[s[i] - 'a'] = i;
+        }
+        string res = "";
+        for(int i=0;i<s.size();i++){
+            if(seen[s[i] - 'a']) continue;
+           while ( !res.empty() && res.back() > s[i] && last_index[res.back() - 'a'] > i)
+            {
+                seen[res.back() - 'a'] = false;
+                res.pop_back();
+            }
+            res.push_back(s[i]);
+            seen[s[i] - 'a'] = true;
+        }
+        return res;
+    }
+};

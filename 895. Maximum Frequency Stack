@@ -1,0 +1,32 @@
+class FreqStack {
+public:
+    int maxi = 0;
+    vector<stack<int>> res;
+    unordered_map<int,int> mp;
+    FreqStack() {
+        res.resize(10001);
+    }
+    
+    void push(int val) {
+        mp[val]++;
+        int count = mp[val];
+        res[count].push(val);
+        maxi = max(count,maxi);
+    }
+    
+    int pop() {
+        int last = res[maxi].top();
+        res[maxi].pop();
+        mp[last]--;
+        if(res[maxi].empty())
+            maxi--;
+            return last;
+    }
+};
+
+/**
+ * Your FreqStack object will be instantiated and called as such:
+ * FreqStack* obj = new FreqStack();
+ * obj->push(val);
+ * int param_2 = obj->pop();
+ */

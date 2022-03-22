@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string getSmallestString(int n, int k) {
+        string ans="";
+        int i = 0;
+        while(i<n){
+            ans+='a';
+            i++;
+        }
+        k=k-n;
+        int j = n-1;
+        while(k>0){
+            if(k<25){
+                ans[j] = (char)('a'+k);
+                k=0;
+            }
+            else{
+                ans[j] = (char)('a'+25);
+                k=k-25;
+            }
+            j--;
+        }
+        return ans;
+    }
+};

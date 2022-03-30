@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maximumTop(vector<int>& nums, int k) {
+     if(nums.size() == 1 && k%2==1) return -1;
+        int maxi = 0;
+        int n = nums.size();
+        int a = min(n,k-1);
+        for(int i=0;i<a;i++){
+            maxi = max(maxi,nums[i]);
+        }
+        if(k<nums.size()){
+            maxi = max(maxi,nums[k]);
+        }
+        return maxi;
+    }
+};

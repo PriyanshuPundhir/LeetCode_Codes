@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int splitArray(vector<int>& nums, int m) {
+        int maxNo = 0;
+        long total = 0;
+        for(int el : nums){
+          maxNo = max(el,maxNo);
+            total+=el;
+        }
+            long low = maxNo;
+            long high = total;
+        while(low<high){
+            long mid = (low+(high-low)/2);
+            if(valid_division(mid,nums,m)){
+                high = mid;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        return (int)low;
+    }
+     bool valid_division(long maxsum, vector<int>& nums,int m){
+        int totalsubset = 1;
+        int totalrunningsum = 0;
+        for(int num:nums){
+            totalrunningsum+=num;
+            if(totalrunningsum > maxsum){
+                totalrunningsum = 0;
+                totalrunningsum+=num;
+                totalsubset++;
+                
+                if(totalsubset > m) return false;
+            }
+        }
+        return true;
+    }
+};

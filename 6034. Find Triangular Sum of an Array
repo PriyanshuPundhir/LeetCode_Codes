@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int triangularSum(vector<int>& nums) {
+        int n = nums.size();
+        int a = solve(nums,n);
+        return a;
+    }
+    int solve(vector<int>& nums , int n){
+        if(n==1)
+        return nums[0];
+        vector<int> temp(n);
+        for (int i = 0; i < n - 1; i++)
+        {
+            int x = nums[i] + nums[i + 1];
+            temp[i] = x%10;
+        }
+        return solve(temp,n-1);
+    }
+};

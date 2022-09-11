@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int partitionString(string s) {
+        unordered_map<char,int> map;
+        int len=0;
+        int left = 0;
+        int right = 0;
+        int n = s.size();
+        while(right<n){
+            if(map.find(s[right])!=map.end()){
+                left = max(left,map[s[right]]);
+                len++;// = max(len,right-left+1);
+                 map.clear();
+                map[s[right]] = right;
+            }
+            else
+                map[s[right]] = right;
+                right++;
+        }
+        return len+1;
+    }
+};
